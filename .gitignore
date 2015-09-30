@@ -1,0 +1,12 @@
+node_modules
+dist
+.tmp
+.sass-cache
+.idea
+src/vendor
+src/index.html
+src/styles/main.less
+src/styles/main.map
+/vendor
+*.mo
+test/karma.conf.js
