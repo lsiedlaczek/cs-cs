@@ -1,7 +1,7 @@
 'use strict';
 import angular from 'angular';
-import csRouting from './components/cs-routing/cs-routing-module.js';
+//import csRouting from './components/cs-routing/cs-routing-module.js';
 
-export default angular.module('cs', [
-  csRouting.name
+export default angular.module('csPosts', [
+  //csRouting.name
 ]);

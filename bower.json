@@ -9,7 +9,7 @@
     "angular-mocks": "^1.4.0",
     "angular-scenario": "^1.4.0"
   },
-  "name": "cs-common",
+  "name": "cs-cs",
   "version": "0.0.1",
   "main": [
     "README.md"
