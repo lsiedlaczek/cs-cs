@@ -1,10 +1,11 @@
 'use strict';
 
 export default class CsVideosViewPageController {
-
-  constructor() {
-    console.log('view page');
+  constructor(api, video) {
+    Object.assign(this, { api, video });
+    console.log('view page', video);
+    this.starter = 'view page shit';
   }
 }
 
-CsVideosViewPageController.$inject = [];
+CsVideosViewPageController.$inject = ['csVideosApiService', 'video'];

@@ -1,6 +1,9 @@
 'use strict';
 import angular from 'angular';
 
+// we declare it as an constant because it will be reused
+const videosUrl = '/videos';
+
 /**
  * @ngdoc overview
  * @name csRouting
@@ -15,7 +18,7 @@ export default angular
   ])
   .config(baseRoutingConfig)
   .config(videosRoutingConfig)
-//  .config(otherwiseRoutingConfig);
+  .config(otherwiseRoutingConfig);
 
 /**
  * Base routing for core structure
@@ -24,7 +27,7 @@ export default angular
  */
 function baseRoutingConfig($stateProvider) {
   $stateProvider.state('cs', {
-    url: '/',
+    url: '',
     template: '<div ui-view></div>',
     abstract: true
   });
@@ -34,7 +37,7 @@ baseRoutingConfig.$inject = ['$stateProvider'];
 
 function videosRoutingConfig($stateProvider) {
   $stateProvider.state('cs.videos', {
-    url: '/videos',
+    url: videosUrl,
     template: '<div ui-view></div>',
     abstract: true
   });
@@ -42,13 +45,13 @@ function videosRoutingConfig($stateProvider) {
 
 videosRoutingConfig.$inject = ['$stateProvider'];
 
-/*function otherwiseRoutingConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider.state('otherwise', {
-    url: '/videos',
+function otherwiseRoutingConfig($stateProvider, $urlRouterProvider) {
+/*  $stateProvider.state('otherwise', {
+    url: videosUrl,
     template: '<div ui-view></div>',
     abstract: true
   });
-  $urlRouterProvider.otherwise('/cs/videos');
+  $urlRouterProvider.otherwise(videosUrl);*/
 }
 
-otherwiseRoutingConfig.$inject = ['$stateProvider', '$urlRouterProvider'];*/
+otherwiseRoutingConfig.$inject = ['$stateProvider', '$urlRouterProvider'];

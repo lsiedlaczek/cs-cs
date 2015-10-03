@@ -1,5 +1,6 @@
 'use strict';
 import angular from 'angular';
+import csVideosApi from '../cs-videos-api/cs-videos-api-module.js';
 
 /**
  * @ngdoc overview
@@ -11,13 +12,15 @@ import angular from 'angular';
  */
 export default angular
   .module('csVideosRouting', [
-    'ui.router'
+    'ui.router',
+    csVideosApi.name
   ])
   .constant('csVideos', {
     path: 'cs-videos/components'
   })
   .config(videosListRoutingConfig)
-  .config(videosViewRoutingConfig);
+  .config(videosViewRoutingConfig)
+  .config(videosEditRoutingConfig);
 
 /**
  *
@@ -45,10 +48,33 @@ videosListRoutingConfig.$inject = ['$stateProvider', 'csVideos'];
  */
 function videosViewRoutingConfig($stateProvider, csVideos) {
   $stateProvider.state('cs.videos.view', {
-    url: '/view',
+    url: '/:id',
     templateUrl: csVideos.path + '/cs-videos-view-page/cs-videos-view-page.html',
-    controller: 'CsVideosViewPageController as videosCtrl'
+    controller: 'CsVideosViewPageController as videosCtrl',
+    resolve: {
+      video: resolveVideo
+    }
   });
+
+  function resolveVideo(api, $stateParams) {
+    return api.get($stateParams.id);
+  }
+
+  resolveVideo.$inject = ['csVideosApiService', '$stateParams'];
 }
 
 videosViewRoutingConfig.$inject = ['$stateProvider', 'csVideos'];
+
+/**
+ *
+ * @param $stateProvider
+ */
+function videosEditRoutingConfig($stateProvider, csVideos) {
+  $stateProvider.state('cs.videos.edit', {
+    url: '/edit',
+    templateUrl: csVideos.path + '/cs-videos-list-page/cs-videos-list-page.html',
+    controller: 'CsVideosListPageController as videosCtrl'
+  });
+}
+
+videosEditRoutingConfig.$inject = ['$stateProvider', 'csVideos'];
